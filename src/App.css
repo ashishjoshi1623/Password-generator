@@ -1,0 +1,21 @@
+body{
+  background-color: black;
+  color: white;
+}
+
+.password-generator-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.Heading{
+  margin-bottom: 10px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.password{
+  width: 12vw;
+}
