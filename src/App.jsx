@@ -11,6 +11,7 @@ function App() {
   const [charAllowed, setCharAllowed] = useState(false);
   const [numberAllowed, setNumberAllowed] = useState(false);
   const [encPass,setEncPass] = useState("");
+  const [salt,setSalt] = useState(1);
 
   const passRef = useRef(null);
   const encryptPassword = useRef(null);
@@ -43,7 +44,7 @@ function App() {
 
   const passEncrypt = async() => {
     let pass = encryptPassword.current.value;
-    const hash = await bcrypt.hash(pass,10);
+    const hash = await bcrypt.hash(pass,salt);
     setEncPass(hash);
   }
 
@@ -55,9 +56,9 @@ function App() {
     <>
       <section className="password-generator-section">
         <div className="Heading">
-          <h1 className="heading-text">Password Generator</h1>
+          <h1 className="heading-text">Password Generator & Encrypter</h1>
         </div>
-        <div className="input-btn mb-3">
+        <div className="input-btn m-2">
           <input type="text" 
           className="password mx-1 rounded p-1 input" 
           value={password}
@@ -68,7 +69,7 @@ function App() {
           <button className='btn btn-primary m-1' onClick={copyPasswordToClipboard}>copy</button>
         </div>
 
-        <div className="input-check">
+        <div className="input-check m-2">
 
           <input 
           type="range" 
@@ -98,18 +99,32 @@ function App() {
         </div>
 
         {/* encryption */}
-        <div>
+        <div className='m-2'>
         <input 
         type="text" 
         className='mt-3 p-1 rounded-2 input' 
         placeholder='Paste your password here'
         ref={encryptPassword}
         />
+        </div>
+        <div className='m-2'>
+        <label htmlFor="saltround">encryption level :</label>
+        <select name="salt" id="salt" className='m-2 rounded p-1'>
+          <option value="1" onChange={e => setSalt(e.target.value)}>1</option>
+          <option value="2" onChange={e => setSalt(e.target.value)}>2</option>
+          <option value="3" onChange={e => setSalt(e.target.value)}>4</option>
+          <option value="5" onChange={e => setSalt(e.target.value)}>5</option>
+          <option value="6" onChange={e => setSalt(e.target.value)}>6</option>
+          <option value="7" onChange={e => setSalt(e.target.value)}>7</option>
+          <option value="8" onChange={e => setSalt(e.target.value)}>8</option>
+          <option value="9" onChange={e => setSalt(e.target.value)}>9</option>
+          <option value="10" onChange={e => setSalt(e.target.value)}>10</option>
+        </select>
         <button style={{border : '1px solid aqua'}}className='btn btn-dark mx-1' onClick={passEncrypt}>Get Encrypted</button>
         </div>
-        <div>
-        <input type="text" className='rounded m-3 p-3 input' ref={encpass} defaultValue={encPass} readOnly placeholder='Encrypted password appear here'/>
-        <button className='btn btn-primary m-1' onClick={copyEncryptPasswordToClipboard}>copy</button>
+        <div className='m-3'>
+        <input type="text" className='rounded m-1 p-3 input' ref={encpass} defaultValue={encPass} readOnly placeholder='Encrypted password appear here'/>
+        <button className='btn btn-primary' onClick={copyEncryptPasswordToClipboard}>copy</button>
         </div>
         
       </section>
