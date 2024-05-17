@@ -19,3 +19,11 @@ body{
 .password{
   width: 12vw;
 }
+
+.input{
+  min-width: 20vw;
+  height: 5vh;
+  outline: none;
+}
+
+
